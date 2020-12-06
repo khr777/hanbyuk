@@ -41,6 +41,19 @@ public class ArticleController {
 	public String showTakeAPhoto() {
 		return "usr/article/takeAPhoto";
 	}
+	
+	@RequestMapping("usr/article/{boardCode}-detail")
+	public String showDetail(@PathVariable("boardCode") String boardCode, int id, Model model) {
+		Board board = articleService.getBoardIdByBoardCode(boardCode);
+		
+		Article article = articleService.getForPrintArticleById(id);
+		
+		model.addAttribute("board", board);
+		model.addAttribute("article", article);
+		
+		return "usr/article/detail";
+	}
+	
 
 	// 사용자 메뉴 끝
 	
@@ -117,6 +130,17 @@ public class ArticleController {
 		return "admin/home/main";
 	}
 	
+	@RequestMapping("admin/article/{boardCode}-detail")
+	public String showDetailAd(@PathVariable("boardCode") String boardCode, int id, Model model) {
+		Board board = articleService.getBoardIdByBoardCode(boardCode);
+		
+		Article article = articleService.getForPrintArticleById(id);
+		
+		model.addAttribute("board", board);
+		model.addAttribute("article", article);
+		
+		return "admin/article/detail";
+	}
 	
 	
 	
