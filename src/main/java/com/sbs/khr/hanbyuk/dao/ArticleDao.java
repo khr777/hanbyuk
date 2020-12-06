@@ -18,4 +18,10 @@ public interface ArticleDao {
 
 	List<Article> getForPrintArticles(@Param("boardId") int boardId);
 
+	Article getForPrintArticleById(@Param("id") int id);
+
+	void modify(Map<String, Object> param);
+
+	void delete(@Param("boardId") int boardId, @Param("id") int id);
+
 }

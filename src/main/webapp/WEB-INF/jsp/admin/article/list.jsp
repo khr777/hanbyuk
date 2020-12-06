@@ -14,10 +14,9 @@
 		<div>제목 : ${article.title}</div>
 		<div>내용 : ${article.body}</div>
 		<button type="button" onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
-		<button>삭제</button>
+		<button type="button" onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
 		<hr />
 	</c:forEach>
 </div>
-
 
 <%@ include file="../part/foot.jspf"%>

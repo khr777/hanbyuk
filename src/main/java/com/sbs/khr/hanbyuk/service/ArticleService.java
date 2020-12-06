@@ -28,4 +28,16 @@ public class ArticleService {
 		return articleDao.getForPrintArticles(boardId);
 	}
 
+	public Article getForPrintArticleById(int id) {
+		return articleDao.getForPrintArticleById(id);
+	}
+
+	public void modify(Map<String, Object> param) {
+		articleDao.modify(param);
+	}
+
+	public void delete(int boardId, int id) {
+		articleDao.delete(boardId, id);
+	}
+
 }

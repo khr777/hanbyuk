@@ -29,7 +29,31 @@
 		SELECT *
 		FROM article
 		WHERE boardId = #{boardId}
+		ORDER BY id DESC 
 	</select>
+	
+	
+	<select id="getForPrintArticleById" resultType="Article">
+		SELECT *
+		FROM article
+		WHERE id = #{id}
+	</select>
+	
+	<update id="modify" >
+		UPDATE article
+		<set>
+			updateDate = NOW(),
+			<if test="title != null">title = #{title},</if>
+			<if test="body != null">body = #{body}</if>
+			WHERE id = #{id}
+		</set>
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM article
+		WHERE id = #{id}
+		AND boardId = #{boardId} 
+	</delete>
 
 
 
