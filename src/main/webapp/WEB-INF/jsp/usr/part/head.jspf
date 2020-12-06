@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${title}</title>
+
+<!-- 공통(라이브러리) CSS -->
+<link rel="stylesheet" href="/resource/common.css" />
+
+
+</head>
+<body>
+<div class="menu-box-1 con">
+	<ul>
+		<li><a href="../home/main">처음으로</a></li>
+		<li><a href="../article/performance-list">공연안내</a></li>
+		<li><a href="../article/event-list">행사안내</a></li>
+		<li><a href="../article/facility-list">시설안내</a></li>
+		<li><a href="../article/takeAPhoto">사진찍기</a></li>
+	</ul>		
+</div>
+
