@@ -1,10 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="title" value="행사안내"/>
-<%@ include file="../part/head.jspf" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="title" value="행사안내" />
+<%@ include file="../part/head.jspf"%>
 
-<h1 class="con">관리자 ${boardCode}안내</h1>
+<h1 class="con">관리자 ${board.name}</h1>
+
+<div class="con">
+	<c:forEach items="${articles }" var="article">
+		<div>번호 : ${article.id}</div>
+		<div>작성일 : ${article.regDate}</div>
+		<div>수정일 : ${article.updateDate}</div>
+		<div>제목 : ${article.title}</div>
+		<div>내용 : ${article.body}</div>
+		<button type="button" onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
+		<button>삭제</button>
+		<hr />
+	</c:forEach>
+</div>
 
 
-<%@ include file="../part/foot.jspf" %>
+<%@ include file="../part/foot.jspf"%>
