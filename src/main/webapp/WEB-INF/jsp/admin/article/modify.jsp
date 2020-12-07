@@ -20,7 +20,7 @@
 		<c:if test="${board.code ne 'event'}">
 			<option value="event">행사안내</option>
 		</c:if>
-	
+
 		<c:if test="${board.code ne 'facility'}">
 			<option value="facility">시설안내</option>
 		</c:if>
@@ -29,21 +29,23 @@
 		placeholder="내용을 입력해주세요." value=" ${article.body }" />
 	<c:forEach var="i" begin="1" end="3" step="1">
 		<c:set var="fileNo" value="${String.valueOf(i)}" />
-		<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
+		<c:set var="file"
+			value="${article.extra.file__common__attachment[fileNo]}" />
 		<div>첨부파일 ${fileNo}
 			${appConfig.getAttachmentFileExtTypeDisplayName('article', i)}</div>
 		<input type="file"
 			accept="${appConfig.getAttachemntFileInputAccept('article', i)}"
 			name="file__article__${article.id }__common__attachment__${fileNo}">
+		<c:if test="${file != null && file.fileExtTypeCode == 'img'}">
+			<img
+				src="/admin/file/showImg?id=${file.id}&updateDate=${file.updateDate}">
+		</c:if>
 		<c:if test="${file != null && file.fileExtTypeCode == 'video'}">
 			<video controls
 				src="/admin/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}">
 			</video>
 		</c:if>
-		<c:if test="${file != null && file.fileExtTypeCode == 'img'}">
-			<img
-				src="/admin/file/showImg?id=${file.id}&updateDate=${file.updateDate}">
-		</c:if>
+
 		<div>첨부파일 ${fileNo} 삭제</div>
 		<input type="checkbox"
 			name="deleteFile__article__${article.id}__common__attachment__${fileNo}"
@@ -139,7 +141,6 @@
 
 		var startUploadFiles = function(onSuccess) {
 			var needToUpload = false;
-
 
 			if (!needToUpload) {
 				needToUpload = fileInput1 && fileInput1.value.length > 0;

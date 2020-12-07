@@ -16,16 +16,17 @@
 		<option value="facility">시설안내</option>
 	</select> <input type="text" name="title" placeholder="제목을 입력해주세요." /> <input
 		type="text" name="body" placeholder="내용을 입력해주세요." />
-	<div>첨부1 비디오</div>
-	<input type="file" accept="video/*"
-		name="file__article__0__common__attachment__1" />
+	<div>첨부1 이미지</div>
+	<input type="file" accept="image/*"
+		name="file__article__0__common__attachment__1">
 	<div>첨부2 비디오</div>
 	<input type="file" accept="video/*"
 		name="file__article__0__common__attachment__2" />
-			<div>첨부2 비디오</div>
-	<input type="file" accept="image/*"
-							name="file__article__0__common__attachment__3">		
-		
+	<div>첨부3 비디오</div>
+	<input type="file" accept="video/*"
+		name="file__article__0__common__attachment__3" />
+
+
 	<button type="submit">작성</button>
 </form>
 
@@ -59,18 +60,18 @@
 
 		var maxSizeMb = 50;
 		var maxSize = maxSizeMb * 1024 * 1024 //50MB
-		
+
 		if (form.file__article__0__common__attachment__1.value) {
-			if ( form.file__article__0__common__attachment__1.files[0].size > maxSize ) {
+			if (form.file__article__0__common__attachment__1.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
 				return;
-			} 
+			}
 		}
 		if (form.file__article__0__common__attachment__2.value) {
-			if ( form.file__article__0__common__attachment__2.files[0].size > maxSize ) {
+			if (form.file__article__0__common__attachment__2.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
 				return;
-			} 
+			}
 		}
 		if (form.file__article__0__common__attachment__3.value) {
 			if (form.file__article__0__common__attachment__3.files[0].size > maxSize) {
@@ -90,13 +91,13 @@
 				onSuccess();
 				return;
 			}
-			var fileUploadFormData = new FormData(form); 
+			var fileUploadFormData = new FormData(form);
 			$.ajax({
 				url : './../file/doUploadAjax',
 				data : fileUploadFormData,
 				processData : false,
 				contentType : false,
-				dataType:"json",
+				dataType : "json",
 				type : 'POST',
 				success : onSuccess
 			});
@@ -104,13 +105,13 @@
 		writeFormSubmitDone = true;
 		startUploadFiles(function(data) {
 			var fileIdsStr = '';
-			if ( data && data.body && data.body.fileIdsStr ) {
+			if (data && data.body && data.body.fileIdsStr) {
 				fileIdsStr = data.body.fileIdsStr;
 			}
 			form.fileIdsStr.value = fileIdsStr;
 			form.file__article__0__common__attachment__1.value = '';
 			form.file__article__0__common__attachment__2.value = '';
-			
+
 			form.submit();
 		});
 	}

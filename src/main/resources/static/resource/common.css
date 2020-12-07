@@ -36,4 +36,9 @@ a {
 }
 
 
+
 /* 탑바 끝 */
+
+img, video {
+	width: 700px;
+}

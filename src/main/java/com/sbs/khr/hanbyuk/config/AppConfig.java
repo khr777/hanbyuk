@@ -11,11 +11,11 @@ public class AppConfig {
 
 
 	public String getAttachmentFileExtTypeCode(String relTypeCode, int fileNo) {
-		if (fileNo > 2) {
-			return "img";
+		if (fileNo > 1) {
+			return "video";
 		}
 
-		return "video";
+		return "img";
 	}
 
 	public String getAttachmentFileExtTypeDisplayName(String relTypeCode, int fileNo) {
