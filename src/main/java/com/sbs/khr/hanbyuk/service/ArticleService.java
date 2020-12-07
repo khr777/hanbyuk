@@ -94,6 +94,7 @@ public class ArticleService {
 
 	public void delete(int boardId, int id) {
 		articleDao.delete(boardId, id);
+		fileService.deleteFiles("article", id);
 	}
 
 }
