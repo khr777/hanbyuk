@@ -57,7 +57,7 @@ public class ArticleService {
 	public Article getForPrintArticleById(int id) {
 		Article article = articleDao.getForPrintArticleById(id);
 		
-		List<File> files = fileService.getFilesMapKeyFileNo("article", article.getId(), "common", "attachment");
+		List<File> files = fileService.getFiles("article", article.getId(), "common", "attachment");
 
 		Map<String, File> filesMap = new HashMap<>();
 
@@ -65,11 +65,8 @@ public class ArticleService {
 			filesMap.put(file.getFileNo() + "", file);
 		}
 
-		if (article.getExtra() == null) {
-			article.setExtra(new HashMap<>());
-		}
+		Util.putExtraVal(article, "file__common__attachment", filesMap);
 
-		article.getExtra().put("file__common__attachment", filesMap);
 		return article;
 	}
 

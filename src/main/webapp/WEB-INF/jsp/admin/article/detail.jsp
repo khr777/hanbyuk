@@ -30,6 +30,10 @@
 			</video>
 		</div>
 	</c:if>
+	<c:if test="${article.extra.file__common__attachment['3'] != null}">
+		<div>첨부 파일 3</div>
+		<img src="/admin/file/showImg?id=${article.extra.file__common__attachment['3'].id}&updateDate=${article.extra.file__common__attachment['3'].updateDate}" alt="" />
+	</c:if>
 
 	<button type="button"
 		onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
