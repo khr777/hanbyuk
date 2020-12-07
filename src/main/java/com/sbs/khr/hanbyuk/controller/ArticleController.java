@@ -80,21 +80,27 @@ public class ArticleController {
 	}
 
 	@RequestMapping("admin/article/doWrite")
-	public String doWriteAd(@RequestParam Map<String, Object> param) {
+	public String doWriteAd(@RequestParam Map<String, Object> param, Model model) {
+		
 
 		String boardCode = Util.getAsStr(param.get("boardCode"));
 		Board board = articleService.getBoardIdByBoardCode(boardCode);
 
 		param.put("boardId", board.getId());
 
-		articleService.write(param);
+		int id = articleService.write(param);
+		
+		model.addAttribute("msg", String.format("%d번 게시물이 작성되었습니다.", id));
+		model.addAttribute("replaceUri", "../home/main");
 
-		return "admin/home/main";
+		return "admin/common/redirect";
 	}
 	
 	@RequestMapping("admin/article/{boardCode}-modify")
 	public String showModify(@PathVariable("boardCode") String boardCode, int id, Model model) {
 		Article article = articleService.getForPrintArticleById(id);
+		
+		System.out.println("article에 파일이 없나? : " + article);
 		
 		Board board = articleService.getBoardIdByBoardCode(boardCode);
 		
@@ -107,16 +113,23 @@ public class ArticleController {
 	
 	
 	@RequestMapping("admin/article/{boardCode}-doModify")
-	public String doModify(@PathVariable("boardCode") String boardCode, @RequestParam Map<String, Object> param) {
+	public String doModify( @RequestParam Map<String, Object> param, Model model) {
 		
-		Board board = articleService.getBoardIdByBoardCode(boardCode);
+		Board board = articleService.getBoardIdByBoardCode(Util.getAsStr(param.get("boardCode")));	
+		
 		
 		param.put("boardId", board.getId());
 		
+		
 		articleService.modify(param);
 		
+		System.out.println("다시 param : " + param);
 		
-		return "admin/home/main";
+		model.addAttribute("msg", "게시물이 수정되었습니다.");
+		model.addAttribute("replaceUri", "../home/main");
+		
+		
+		return "admin/common/redirect";
 	}
 	
 	@RequestMapping("admin/article/{boardCode}-doDelete")

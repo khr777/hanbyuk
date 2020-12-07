@@ -47,3 +47,37 @@ updateDate = NOW(),
 `name` = '시설안내',
 `code` = 'facility';
 
+
+CREATE TABLE `file` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME,
+    updateDate DATETIME,
+    delDate DATETIME,
+	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+	relTypeCode CHAR(50) NOT NULL,
+	relId INT(10) UNSIGNED NOT NULL,
+    originFileName VARCHAR(100) NOT NULL,
+    fileExt CHAR(10) NOT NULL,
+    typeCode CHAR(20) NOT NULL,
+    type2Code CHAR(20) NOT NULL,
+    fileSize INT(10) UNSIGNED NOT NULL,
+    fileExtTypeCode CHAR(10) NOT NULL,
+    fileExtType2Code CHAR(10) NOT NULL,
+    fileNo TINYINT(2) UNSIGNED NOT NULL,
+    `body` LONGBLOB
+);
+
+DESC `file`;
+
+# 게시물 작성시, 내용이 비어있어도 게시물 생성 허용
+ALTER TABLE article MODIFY COLUMN `body` LONG NULL;
+
+SELECT *
+FROM article;
+SELECT *
+FROM `file`;
+
+TRUNCATE `file`;
+TRUNCATE article;
+
+

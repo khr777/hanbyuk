@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.cache.LoadingCache;
+import com.sbs.khr.hanbyuk.dto.File;
 
 public class Util {
 
@@ -236,6 +237,7 @@ public class Util {
 		}
 	}
 	
+
 	public static String getFileExtTypeCodeFromFileName(String fileName) {
 		String ext = getFileExtFromFileName(fileName).toLowerCase();
 
@@ -247,7 +249,6 @@ public class Util {
 			return "img";
 		case "mp4":
 		case "avi":
-		case "mov":
 			return "video";
 		case "mp3":
 			return "audio";
@@ -268,8 +269,6 @@ public class Util {
 		case "png":
 			return ext;
 		case "mp4":
-			return ext;
-		case "mov":
 			return ext;
 		case "avi":
 			return ext;
@@ -327,7 +326,7 @@ public class Util {
 
 		return null;
 	}
-
+	
 	public static InputStream getBinaryStreamFromBlob(Blob fileBody) {
 		try {
 			return fileBody.getBinaryStream();
@@ -337,178 +336,14 @@ public class Util {
 
 		return null;
 	}
-
+	
 	public static <T extends Object> T getCacheData(LoadingCache cache, int key) {
 		try {
-			return (T) cache.get(key);
+			return (T)cache.get(key);
 		} catch (ExecutionException e) {
 			return null;
 		}
 	}
 
-
-	public static boolean getDateForpasswordModify(String lastPasswordUpdateDate) {
-		
-		// 오늘 날짜를 구하기 위한 객체 선언 
-		Date date = new Date();
-		
-		// 1번 [ member의 마지막 updateDate를 String으로 뽑아온다. ] 
-		//String updateDateStr = "2020-05-28 10:11:11";
-		String updateDateStr = lastPasswordUpdateDate;
-		
-		// 2번 [ 날짜를 출력할 폼을 지정한다. ]
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
-		// 3번 [ 마지막으로 변경한 패스워드 변경일을 String에서 date 타입으로 형변환을 한다. ]
-		Date updateDate = null;
-		try {
-			updateDate = transFormat.parse(updateDateStr);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// 4번 [ updateDateStr을 0000-00-00 형태로 날짜를 출력한다. ]
-		// 그러나 updateDate는 형태가 date이므로 Thu May 28 00:00:00 KST 2020 이런값을 출력한다.
-		System.out.println("updateDateStr : " + updateDateStr);
-		System.out.println("updateDate (String을 Date로 형변환) 결과  : " + updateDate);
-
-		
-		// 5번 [ 캘린더로 날짜를 가져오기 위한 메서드를 입력한다. ] 
-		Calendar cal = Calendar.getInstance();
-		
-		// 6번 [ 날짜를 가져오기 위한 캘린더에 date형태로 형변환한 updateDate를 셋팅한다. ] 
-		cal.setTime(updateDate);
-		
-		
-		// 7번 [ date형태로 날짜를 셋팅한 캘린더에 셋팅한 날짜로부터 3개월이 경과되는 코드를 입력한다. ]
-		cal.add(Calendar.MONTH, 3);
-		//cal.add(Calendar.SECOND, 1);
-		
-		
-		// 8번 [ 캘린더에서 마지막 updateDate 날짜로부터 3개월이 초과한 날을 가져온다. ] 
-		// 경과한 날짜를 비교하기 쉽도록 
-		String currentStr = transFormat.format(cal.getTime());	
-		
-		// 9 번 [ updateDateStr은 마지막으로 패스워드를 변경한 날짜를 String으로 불러온다. ]
-		System.out.println("마지막으로 updateDate 한 날짜 : " + updateDateStr);
-		
-		
-		// 10번 [ currentStr은 3개월이 경과한 날짜(Date)를 String으로 형변환한 값을 가져온다. ] 
-		System.out.println("3개월이 경과 한 날짜 : " + currentStr);
-		
-		
-		// 11번 [ 오늘의 날짜를 String으로 가져온다. ]
-		String today = transFormat.format(date);
-		
-		System.out.println("today : " + today);
-		
-		today = today.replace("-","");
-		currentStr = currentStr.replace("-","");
-		System.out.println("today : " + today);
-		System.out.println("currentStr : " + currentStr);
-		
-		int todayInt = Integer.parseInt(today);
-		int currentInt = Integer.parseInt(currentStr);
-		
-		
-		//12번  updateDate 마지막으로 패스워드를 변경한 날짜로부터 3개월이 초과한 currentStr 날짜와 오늘 날짜를 비교한다.
-		// 기준이 되는 today 오늘 날짜가 마지막 개인정보 변경일로부터 3개월 초과한 currentStr보다 크다면 -1이다. 사전식으로 currentStr이 더 빠를테니까 
-		// 그렇다면 return true.     
-		if ( todayInt > currentInt ) {
-			System.out.println("true " + true);
-			return true;
-		}
-		System.out.println(today.compareTo(currentStr));
-		System.out.println("false " + false);
-		
-		return false;
-	}
-	
-	
-	// uri를 입력 값을 정확하게 받기위해서(변수와 값을 명확하게 구분하기 위해서) 인코딩 해주는 메서드
-	public static String getUriEncoded(String str) {
-		try {
-			return URLEncoder.encode(str, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			return str;
-		}
-	}
-	public static String getNewUriAndEncoded(String uri, String paramName, String pramValue) {
-		return getUriEncoded(getNewUri(uri, paramName, pramValue));
-	}
-	
-	public static String getNewUri(String uri, String paramName, String paramValue) {
-		uri = getNewUriRemoved(uri, paramName);
-
-		if (uri.contains("?")) {
-			uri += "&" + paramName + "=" + paramValue;
-		} else {
-			uri += "?" + paramName + "=" + paramValue;
-		}
-
-		uri = uri.replace("?&", "?");
-
-		return uri;
-	}
-	
-	public static String getNewUriRemoved(String uri, String paramName) {
-		String deleteStrStarts = paramName + "=";
-		int delStartPos = uri.indexOf(deleteStrStarts);
-
-		if (delStartPos != -1) {
-			int delEndPos = uri.indexOf("&", delStartPos);
-
-			if (delEndPos != -1) {
-				delEndPos++;
-				uri = uri.substring(0, delStartPos) + uri.substring(delEndPos, uri.length());
-			} else {
-				uri = uri.substring(0, delStartPos);
-			}
-		}
-
-		if (uri.charAt(uri.length() - 1) == '?') {
-			uri = uri.substring(0, uri.length() - 1);
-		}
-
-		if (uri.charAt(uri.length() - 1) == '&') {
-			uri = uri.substring(0, uri.length() - 1);
-		}
-
-		return uri;
-	}
-	
-	public static String getString(HttpServletRequest req, String paramName, String elseValue) {
-		if (req.getParameter(paramName) == null) {
-			return elseValue;
-		}
-
-		if (req.getParameter(paramName).trim().length() == 0) {
-			return elseValue;
-		}
-
-		return getString(req, paramName);
-	}
-	
-	public static String getString(HttpServletRequest req, String paramName) {
-		return req.getParameter(paramName);
-	}
-
-
-	public static String getDateStrLater(int seconds) {
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		String dateStr = format1.format(System.currentTimeMillis() + seconds * 1000);
-		
-		return dateStr;
-	}
-	
-	public static String getNowDateStr() {
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-		String dateStr = format1.format(System.currentTimeMillis());
-
-		return dateStr;
-	}
 
 }

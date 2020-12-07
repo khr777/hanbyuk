@@ -12,14 +12,31 @@
 	<div>수정일 : ${article.updateDate }</div>
 	<div>제목 : ${article.title }</div>
 	<div>내용 : ${article.body }</div>
-</div>
-<button type="button"
-	onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
-<button type="button"
-	onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
-<button type="button"
-	onclick="history.back();">뒤로가기</button>
+	<c:if test="${article.extra.file__common__attachment['1'] != null}">
+		<div>첨부 파일 1</div>
+		<div class="video-box">
+			<video controls
+				src="/admin/file/streamVideo?id=${article.extra.file__common__attachment['1'].id}&updateDate=${article.extra.file__common__attachment['1'].updateDate}">video
+				not supported
+			</video>
+		</div>
+	</c:if>
+	<c:if test="${article.extra.file__common__attachment['2'] != null}">
+		<div>첨부 파일 2</div>
+		<div class="video-box">
+			<video controls
+				src="/admin/file/streamVideo?id=${article.extra.file__common__attachment['2'].id}&updateDate=${article.extra.file__common__attachment['1'].updateDate}">video
+				not supported
+			</video>
+		</div>
+	</c:if>
 
+	<button type="button"
+		onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
+	<button type="button"
+		onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
+	<button type="button" onclick="history.back();">뒤로가기</button>
+</div>
 
 
 

@@ -44,7 +44,8 @@
 		<set>
 			updateDate = NOW(),
 			<if test="title != null">title = #{title},</if>
-			<if test="body != null">body = #{body}</if>
+			<if test="body != null">body = #{body},</if>
+			<if test="boardId != null">boardId = #{boardId}</if>
 			WHERE id = #{id}
 		</set>
 	</update>
@@ -54,6 +55,14 @@
 		WHERE id = #{id}
 		AND boardId = #{boardId} 
 	</delete>
+	
+	<select id="getArticleById" resultType="Article">
+		SELECT *
+		FROM
+		article
+		WHERE
+		id = #{id}
+	</select>
 
 
 
