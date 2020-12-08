@@ -59,23 +59,25 @@
 
 <script>
 	var ModifyFormSubmitDone = false;
-	var param = $(location).attr('search').slice(
-			$(location).attr('search').indexOf('=') + 1);
-
+	/* var param = $(location).attr('search').slice(
+			$(location).attr('search').indexOf('=') + 1); */ 
 	function ModifyFormSubmit(form) {
+		var fileInput1 = form["file__article__" + param.id
+				+ "__common__attachment__1"];
+		var fileInput2 = form["file__article__" + param.id
+				+ "__common__attachment__2"];
+		var fileInput3 = form["file__article__" + param.id
+				+ "__common__attachment__3"];
 
-		var fileInput1 = form["file__article__" + param
+		
+		var deleteFileInput1 = form["deleteFile__article__" + param.id
 				+ "__common__attachment__1"];
-		var fileInput2 = form["file__article__" + param
+		var deleteFileInput2 = form["deleteFile__article__" + param.id
 				+ "__common__attachment__2"];
-		var fileInput3 = form["file__article__" + param
+		var deleteFileInput3 = form["deleteFile__article__" + param.id
 				+ "__common__attachment__3"];
-		var deleteFileInput1 = form["deleteFile__article__" + param
-				+ "__common__attachment__1"];
-		var deleteFileInput2 = form["deleteFile__article__" + param
-				+ "__common__attachment__2"];
-		var deleteFileInput3 = form["deleteFile__article__" + param
-				+ "__common__attachment__3"];
+
+		
 		if (fileInput1 && deleteFileInput1) {
 			if (deleteFileInput1.checked) {
 				fileInput1.value = '';
@@ -91,32 +93,27 @@
 				fileInput3.value = '';
 			}
 		}
-
 		if (ModifyFormSubmitDone) {
 			alert('처리중입니다.');
 			return;
 		}
-
 		form.boardCode.value = form.boardCode.value.trim();
 		if (form.boardCode.value.length == 0) {
 			alert('카테고리를 선택해주세요.');
 			return;
 		}
-
 		form.title.value = form.title.value.trim();
 		if (form.title.value.length == 0) {
 			alert('제목을 입력해주세요.');
 			form.title.focus();
 			return;
 		}
-
 		form.body.value = form.body.value.trim();
 		if (form.body.value.length == 0) {
 			alert('내용을 입력해주세요.');
 			form.body.focus();
 			return;
 		}
-
 		var maxSizeMb = 50;
 		var maxSize = maxSizeMb * 1024 * 1024 //50MB
 		if (fileInput1 && fileInput1.value) {
@@ -131,17 +128,15 @@
 				return;
 			}
 		}
-
 		if (fileInput3 && fileInput3.value) {
 			if (fileInput3.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
 				return;
 			}
 		}
-
 		var startUploadFiles = function(onSuccess) {
 			var needToUpload = false;
-
+			
 			if (!needToUpload) {
 				needToUpload = fileInput1 && fileInput1.value.length > 0;
 			}
@@ -176,10 +171,9 @@
 			});
 		}
 
+		
 		ModifyFormSubmitDone = true;
-
 		startUploadFiles(function(data) {
-
 			var fileIdsStr = '';
 			if (data && data.body && data.body.fileIdsStr) {
 				fileIdsStr = data.body.fileIdsStr;
@@ -198,7 +192,6 @@
 		});
 	}
 </script>
-
 
 
 <%@ include file="../part/foot.jspf"%>

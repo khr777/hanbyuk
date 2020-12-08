@@ -6,6 +6,10 @@
 
 <h1 class="con">사진찍기 메뉴입니다.</h1>
 
+<div class="con">
+	<button type="button" onclick="location.replace('/admin/article/goPhoto')">사진찍기</button>
+</div>
+
 <c:forEach items="${articles}" var="article">
 	<div class="menu-box con">
 		<img

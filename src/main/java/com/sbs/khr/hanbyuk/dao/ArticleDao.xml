@@ -23,23 +23,36 @@
 			<if test="boardId != null">boardId = #{boardId}</if>
 		</set>
 	</insert>
-	
-	
+
+	<insert id="writeByPhoto" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO photo
+		<set>
+			regDate = NOW(),
+			<if test="email != null">
+				email = #{email},
+			</if>
+			fileId = #{fileIdsStr}
+		</set>
+	</insert>
+
+
 	<select id="getForPrintArticles" resultType="Article">
 		SELECT *
 		FROM article
 		WHERE boardId = #{boardId}
-		ORDER BY id DESC 
+		ORDER BY id DESC
 	</select>
-	
-	
+
+
 	<select id="getForPrintArticleById" resultType="Article">
 		SELECT *
-		FROM article
+		FROM
+		article
 		WHERE id = #{id}
 	</select>
-	
-	<update id="modify" >
+
+	<update id="modify">
 		UPDATE article
 		<set>
 			updateDate = NOW(),
@@ -49,13 +62,20 @@
 			WHERE id = #{id}
 		</set>
 	</update>
-	
+
 	<delete id="delete">
 		DELETE FROM article
 		WHERE id = #{id}
-		AND boardId = #{boardId} 
+		AND boardId =
+		#{boardId}
 	</delete>
 	
+	
+	<delete id="deleteEmail">
+		DELETE FROM photo
+		WHERE id = #{id}
+	</delete>
+
 	<select id="getArticleById" resultType="Article">
 		SELECT *
 		FROM

@@ -36,7 +36,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.excludePathPatterns("/admin/article/*-list").excludePathPatterns("/admin/article/*-detail")
 				.excludePathPatterns("/admin/article/takeAPhoto").excludePathPatterns("/admin/file/streamVideo")
 				.excludePathPatterns("/usr/article/*-detail").excludePathPatterns("/usr/article/takeAPhoto")
-				.excludePathPatterns("/admin/file/showImg").excludePathPatterns("/admin/article/takeAPhotoAd");
+				.excludePathPatterns("/admin/file/showImg").excludePathPatterns("/admin/article/takeAPhotoAd")
+				.excludePathPatterns("/admin/article/goPhoto").excludePathPatterns("/admin/file/doUploadAjax")
+				.excludePathPatterns("/usr/article/doGoPhoto");
 		
 		
 

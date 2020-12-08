@@ -3,8 +3,6 @@ package com.sbs.khr.hanbyuk.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sbs.khr.hanbyuk.dto.Article;
 import com.sbs.khr.hanbyuk.dto.Board;
 import com.sbs.khr.hanbyuk.service.ArticleService;
+import com.sbs.khr.hanbyuk.service.FileService;
 import com.sbs.khr.hanbyuk.util.Util;
 
 @Controller
@@ -22,6 +21,9 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private FileService fileService;
 
 	// 사용자 메뉴 시작
 	@RequestMapping("usr/article/{boardCode}-list")
@@ -37,17 +39,7 @@ public class ArticleController {
 		return "usr/article/list";
 	}
 
-	@RequestMapping("usr/article/takeAPhoto")
-	public String showTakeAPhoto(Model model) {
-		
-		Board board = articleService.getBoardIdByBoardCode("takeAPhoto");
-		List<Article> articles = articleService.getForPrintArticles(board.getId());
-		
-		model.addAttribute("board", board);
-		model.addAttribute("articles", articles);
-		
-		return "usr/article/takeAPhoto";
-	}
+	
 	
 	@RequestMapping("usr/article/{boardCode}-detail")
 	public String showDetail(@PathVariable("boardCode") String boardCode, int id, Model model) {
@@ -60,6 +52,55 @@ public class ArticleController {
 		
 		return "usr/article/detail";
 	}
+	
+	// 사진찍기 시작
+	@RequestMapping("usr/article/takeAPhoto")
+	public String showTakeAPhoto(Model model) {
+		
+		Board board = articleService.getBoardIdByBoardCode("takeAPhoto");
+		List<Article> articles = articleService.getForPrintArticles(board.getId());
+		
+		model.addAttribute("board", board);
+		model.addAttribute("articles", articles);
+		
+		return "usr/article/takeAPhoto";
+	}
+	
+	
+
+	
+	@RequestMapping("admin/article/goPhoto")
+	public String showGoPhoto() {
+		return "admin/article/goPhoto";
+	}
+	
+	@RequestMapping("usr/article/doGoPhoto")
+	public String showDoGoPhoto(@RequestParam Map<String, Object> param, Model model) {
+		
+		int newId = articleService.writeByPhoto(param);
+		
+		model.addAttribute("msg", "메일 발송이 완료되었습니다.");
+		
+		
+		
+		
+		
+		model.addAttribute("replaceUri", "../home/main");
+		
+		articleService.deleteEmail(param);
+		//fileService.deleteFile(Util.getAsInt(param.get("fileIdsStr")));
+		/*
+		 * 파일을 삭제하면 지정한 경로에서 이미지 파일을 불러 메일에서 보여주므로 보여줄 사진이 없게 된다. 한달 또는 지정한 시간이 흐르면
+		 * 사진파일을 삭제하고, 어느 기간 안에 다운로드 하지 않으면 사용할 수 없다고 알리는건 어떨지
+		 * 서버가 꺼져도 메일에서 사진 액빡
+		 */
+		
+		
+		return "usr/common/redirect";
+	}
+	
+	
+	// 사진찍기 끝 
 	
 
 	// 사용자 메뉴 끝
@@ -123,6 +164,7 @@ public class ArticleController {
 	public String doModify( @RequestParam Map<String, Object> param, Model model) {
 		
 		Board board = articleService.getBoardIdByBoardCode(Util.getAsStr(param.get("boardCode")));	
+		System.out.println("board가 이상한가?? : " + board);
 		
 		
 		param.put("boardId", board.getId());
@@ -130,7 +172,6 @@ public class ArticleController {
 		
 		articleService.modify(param);
 		
-		System.out.println("다시 param : " + param);
 		
 		model.addAttribute("msg", "게시물이 수정되었습니다.");
 		model.addAttribute("replaceUri", "../home/main");
@@ -163,7 +204,7 @@ public class ArticleController {
 	}
 	
 	
-	
+	// 사진찍기 시작	
 	
 	
 	// 관리자 페이지에서 사진찍기 어떻게 구현할지 생각하기.
@@ -178,6 +219,14 @@ public class ArticleController {
 		return "admin/article/takeAPhoto";
 	}
 	
+	
+
+	
+	
+	
+	
+	
+	// 사진찍기 끝
 	
 	
 	

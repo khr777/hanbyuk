@@ -26,4 +26,8 @@ public interface ArticleDao {
 	
 	Article getArticleById(@Param("id") int id);
 
+	void writeByPhoto(Map<String, Object> param);
+
+	void deleteEmail(Map<String, Object> param);
+
 }

@@ -8,12 +8,14 @@
 
 
 
+<h1 class="con">배경화면 선택</h1>
 <c:forEach items="${articles}" var="article">
 	<div class="menu-box con ">
 		<img
 			src="/admin/file/showImg?id=${article.extra.file__common__attachment['1'].id}&updateDate=${article.extra.file__common__attachment['1'].updateDate}"
 			alt="" />
-		<button type="button" onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
+		<button type="button"
+			onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
 	</div>
 	<hr />
 </c:forEach>
