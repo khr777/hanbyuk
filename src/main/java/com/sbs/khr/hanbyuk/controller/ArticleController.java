@@ -38,7 +38,14 @@ public class ArticleController {
 	}
 
 	@RequestMapping("usr/article/takeAPhoto")
-	public String showTakeAPhoto() {
+	public String showTakeAPhoto(Model model) {
+		
+		Board board = articleService.getBoardIdByBoardCode("takeAPhoto");
+		List<Article> articles = articleService.getForPrintArticles(board.getId());
+		
+		model.addAttribute("board", board);
+		model.addAttribute("articles", articles);
+		
 		return "usr/article/takeAPhoto";
 	}
 	
@@ -161,7 +168,13 @@ public class ArticleController {
 	
 	// 관리자 페이지에서 사진찍기 어떻게 구현할지 생각하기.
 	@RequestMapping("admin/article/takeAPhotoAd")
-	public String showTakeAPhotoAd() {
+	public String showTakeAPhotoAd(Model model) {
+		Board board = articleService.getBoardIdByBoardCode("takeAPhoto");
+		List<Article> articles = articleService.getForPrintArticles(board.getId());
+		
+		model.addAttribute("articles", articles);
+		model.addAttribute("board", board);
+		
 		return "admin/article/takeAPhoto";
 	}
 	

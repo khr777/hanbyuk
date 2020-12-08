@@ -1,6 +1,23 @@
-server:
-  port: 8085
 spring:
+  profiles:
+    active: local # 기본적으로 local이 선택된다는 뜻 / 실무환경에서는 production이 된다. 
+  session:
+    timeout: 600
+    store-type: redis
+    redis:
+      flush-mode: on-save
+      namespace: spring:session
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kim5638yw@gmail.com
+    password: sbs123414
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   servlet:
     multipart:
       file-size-threshold: 1MB
@@ -17,4 +34,44 @@ spring:
     username: sbsst  
     password: sbs123414
 mybatis:
-  type-aliases-package: com.sbs.khr.hanbyuk.dto 
+  type-aliases-package: com.sbs.khr.hanbyuk.dto
+server:
+  error:
+    include-exception: true
+    include-stacktrace: always
+    include-message: always
+    include-binding-errors: always
+custom:
+  siteName: hanbyuk
+  siteMainUri: http://localhost:8085/usr/home/main
+  logoText: hanbyuk  
+  emailFrom: no-reply@localhost.com
+  emailFromName: hanbyuk
+  logging:
+    dir: log
+    level: info
+  
+  
+---
+
+spring:
+  profiles: local
+server:
+  port: 8085
+
+---
+
+spring:
+  profiles: production
+  servlet:
+    multipart:
+      location: /tmp
+  datasource:    # 실무환경용 DB / 얘가 활성화 된다는 의미는 리눅스 안에 있다는 의미 #리눅스 안에서만 로컬 사용 가능하게 만들어 놓음.
+    username: ouonzLocal
+    password: sbs123414
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/hanbyuk?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+custom:
+  logging:
+    dir: /tmp/gg-log
+    level: info    

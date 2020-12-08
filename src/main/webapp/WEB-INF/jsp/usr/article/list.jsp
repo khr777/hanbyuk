@@ -11,9 +11,6 @@
 		<c:forEach items="${articles }" var="article">
 			<div class="menu-box"
 				onclick="location.replace('../article/${board.code }-detail?id=${article.id}')">
-				<div>번호 : ${article.id}</div>
-				<div>작성일 : ${article.regDate}</div>
-				<div>수정일 : ${article.updateDate}</div>
 				<div>제목 : ${article.title}</div>
 			</div>
 			<hr />

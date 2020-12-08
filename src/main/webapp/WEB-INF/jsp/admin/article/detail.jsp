@@ -43,7 +43,7 @@
 			onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
 		<button type="button"
 			onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
-		<button type="button" onclick="history.back();">뒤로가기</button>
+		<button type="button" onclick="location.replace('${board.code}-list')">뒤로가기</button>
 	</div>
 </div>
 

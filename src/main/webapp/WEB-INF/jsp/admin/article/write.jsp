@@ -14,6 +14,7 @@
 		<option value="performance">공연안내</option>
 		<option value="event">행사안내</option>
 		<option value="facility">시설안내</option>
+		<option value="takeAPhoto">사진배경</option>
 	</select> <input type="text" name="title" placeholder="제목을 입력해주세요." /> <input
 		type="text" name="body" placeholder="내용을 입력해주세요." />
 	<div>첨부1 이미지</div>
