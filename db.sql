@@ -47,6 +47,12 @@ updateDate = NOW(),
 `name` = '시설안내',
 `code` = 'facility';
 
+# 사진찍기 게시판 생성
+INSERT INTO board 
+SET regDate = NOW(),
+updateDate = NOW(),
+`name` = '사진찍기',
+`code` = 'takeAPhoto';
 
 CREATE TABLE `file` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -72,12 +78,21 @@ DESC `file`;
 # 게시물 작성시, 내용이 비어있어도 게시물 생성 허용
 ALTER TABLE article MODIFY COLUMN `body` LONG NULL;
 
-SELECT *
-FROM article;
-SELECT *
-FROM `file`;
+# 회원(관리자) 테이블 생성
+CREATE TABLE `member` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    loginId CHAR(100) NOT NULL,
+    loginPw CHAR(200) NOT NULL
+);
 
-TRUNCATE `file`;
+# 관리자 계정 생성(지정해서 1개)
+INSERT INTO `member` 
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'admin',
+loginPw = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+
 TRUNCATE article;
-
-
+TRUNCATE `file`;

@@ -34,9 +34,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.excludePathPatterns("/admin/member/login").excludePathPatterns("/admin/member/doLogin")
 				.excludePathPatterns("/usr/article/*-list").excludePathPatterns("/usr/home/main")
 				.excludePathPatterns("/admin/article/*-list").excludePathPatterns("/admin/article/*-detail")
-				.excludePathPatterns("/admin/article/takeAPhoto")
+				.excludePathPatterns("/admin/article/takeAPhoto").excludePathPatterns("/admin/file/streamVideo")
 				.excludePathPatterns("/usr/article/*-detail").excludePathPatterns("/usr/article/takeAPhoto")
 				.excludePathPatterns("/admin/file/showImg").excludePathPatterns("/admin/article/takeAPhotoAd");
+		
 		
 
 		// 로그인 상태에서 접속할 수 없는 URI 전부 기술
