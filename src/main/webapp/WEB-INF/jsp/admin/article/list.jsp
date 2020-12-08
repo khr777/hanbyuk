@@ -17,11 +17,12 @@
 				<div>수정일 : ${article.updateDate}</div>
 				<div>제목 : ${article.title}</div>
 			</div>
-			<button type="button"
-				onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
-			<button type="button"
-				onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
-
+			<c:if test="${isLogined}">
+				<button type="button"
+					onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
+				<button type="button"
+					onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
+			</c:if>
 			<hr />
 		</c:forEach>
 	</div>
@@ -33,12 +34,12 @@
 				onclick="location.replace('../article/${board.code }-detail?id=${article.id}')">
 				<div>시설명 : ${article.title}</div>
 			</div>
-
-			<button type="button"
-				onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
-			<button type="button"
-				onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
-
+			<c:if test="${isLogined}">
+				<button type="button"
+					onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
+				<button type="button"
+					onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
+			</c:if>
 			<hr />
 		</c:forEach>
 	</div>
