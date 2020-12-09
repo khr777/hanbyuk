@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +12,12 @@
 
 </head>
 <body>
-<div class="menu-box-1 con">
-	<ul>
-		<li><a href="../home/main">처음으로</a></li>
-		<li><a href="../article/performance-list">공연안내</a></li>
-		<li><a href="../article/event-list">행사안내</a></li>
-		<li><a href="../article/facility-list">시설안내</a></li>
-		<li><a href="../article/takeAPhoto">기념사진촬영</a></li>
-	</ul>		
-</div>
-
+	<div class="menu-box-1 con">
+		<ul>
+			<li><a href="../home/main">전주한벽문화관</a></li>
+			<li><a href="../article/performance-list">공연안내</a></li>
+			<li><a href="../article/event-list">마당창극</a></li>
+			<li><a href="../article/facility-list">대관,기획공연</a></li>
+			<li><a href="../article/takeAPhoto">기념사진촬영</a></li>
+		</ul>
+	</div>

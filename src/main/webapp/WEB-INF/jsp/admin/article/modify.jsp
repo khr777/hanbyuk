@@ -18,11 +18,11 @@
 			<option value="performance">공연안내</option>
 		</c:if>
 		<c:if test="${board.code ne 'event'}">
-			<option value="event">행사안내</option>
+			<option value="event">마당창극</option>
 		</c:if>
 
 		<c:if test="${board.code ne 'facility'}">
-			<option value="facility">시설안내</option>
+			<option value="facility">대관,기획공연</option>
 		</c:if>
 	</select> <input type="text" name="title" placeholder="제목을 입력해주세요."
 		value="${article.title }" /> <input type="text" name="body"

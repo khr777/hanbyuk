@@ -14,8 +14,12 @@
 		<img
 			src="/admin/file/showImg?id=${article.extra.file__common__attachment['1'].id}&updateDate=${article.extra.file__common__attachment['1'].updateDate}"
 			alt="" />
-		<button type="button"
-			onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
+		<c:if test="${isLogined }">
+			<button type="button"
+				onclick="location.replace('../article/${board.code}-modify?id=${article.id}')">수정</button>
+			<button type="button"
+				onclick="if(confirm('삭제하시겠습니까?') == false ) return false; location.replace('../article/${board.code}-doDelete?id=${article.id }')">삭제</button>
+		</c:if>
 	</div>
 	<hr />
 </c:forEach>

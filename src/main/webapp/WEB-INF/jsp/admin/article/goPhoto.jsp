@@ -14,7 +14,7 @@
 		name="email" placeholder="사진을 전송받을 이메일을 입력해주세요." /> 
 	<div>첨부1 이미지</div>
 	<input type="file" accept="image/*"
-		name="file__article__0__common__attachment__1">
+		name="file__photo__0__common__attachment__1">
 
 
 	<button type="submit">작성</button>
@@ -40,24 +40,24 @@
 		var maxSizeMb = 50;
 		var maxSize = maxSizeMb * 1024 * 1024 //50MB
 
-		if ( form.file__article__0__common__attachment__1.value.length == 0 ) {
+		if ( form.file__photo__0__common__attachment__1.value.length == 0 ) {
 			alert('사진을 첨부해주세요.');
 			return;
 		}
 
-		if (form.file__article__0__common__attachment__1.value) {
-			if (form.file__article__0__common__attachment__1.files[0].size > maxSize) {
+		if (form.file__photo__0__common__attachment__1.value) {
+			if (form.file__photo__0__common__attachment__1.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
 				return;
 			}
 		}
 		var startUploadFiles = function(onSuccess) {
-			var needToUpload = form.file__article__0__common__attachment__1.value.length > 0;
+			var needToUpload = form.file__photo__0__common__attachment__1.value.length > 0;
 			if (!needToUpload) {
-				needToUpload = form.file__article__0__common__attachment__2.value.length > 0;
+				needToUpload = form.file__photo__0__common__attachment__2.value.length > 0;
 			}
 			if (!needToUpload) {
-				needToUpload = form.file__article__0__common__attachment__3.value.length > 0;
+				needToUpload = form.file__photo__0__common__attachment__3.value.length > 0;
 			}
 			if (needToUpload == false) {
 				onSuccess();
@@ -81,7 +81,7 @@
 				fileIdsStr = data.body.fileIdsStr;
 			}
 			form.fileIdsStr.value = fileIdsStr;
-			form.file__article__0__common__attachment__1.value = '';
+			form.file__photo__0__common__attachment__1.value = '';
 
 			form.submit();
 		});

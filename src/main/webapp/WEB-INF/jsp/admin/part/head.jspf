@@ -20,10 +20,10 @@ var param = ${paramJson};
 <body>
 	<div class="menu-box-1 con">
 		<ul>
-			<li><a href="../home/main">처음으로</a></li>
+			<li><a href="../home/main">전주한벽문화관</a></li>
 			<li><a href="../article/performance-list">공연안내</a></li>
-			<li><a href="../article/event-list">행사안내</a></li>
-			<li><a href="../article/facility-list">시설안내</a></li>
+			<li><a href="../article/event-list">마당창극</a></li>
+			<li><a href="../article/facility-list">대관,기획공연</a></li>
 			<li><a href="../article/takeAPhotoAd">기념사진촬영</a></li>
 			<li><a href="../article/write">게시물 작성</a></li>
 			<c:if test="${isLogined == false}">

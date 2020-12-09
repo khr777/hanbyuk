@@ -12,8 +12,8 @@
 	<input type="hidden" name="fileIdsStr" /> <select name="boardCode">
 		<option value="">카테고리 선택</option>
 		<option value="performance">공연안내</option>
-		<option value="event">행사안내</option>
-		<option value="facility">시설안내</option>
+		<option value="event">마당창극</option>
+		<option value="facility">대관,기획공연</option>
 		<option value="takeAPhoto">사진배경</option>
 	</select> <input type="text" name="title" placeholder="제목을 입력해주세요." /> <input
 		type="text" name="body" placeholder="내용을 입력해주세요." />
