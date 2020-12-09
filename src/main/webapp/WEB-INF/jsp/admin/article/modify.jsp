@@ -53,6 +53,8 @@
 	</c:forEach>
 	<div>
 		<button type="submit">수정</button>
+		
+		<button type="button" onclick="location.replace('${param.encodedRequestUri}')">뒤로가기</button>
 	</div>
 
 </form>
@@ -60,7 +62,7 @@
 <script>
 	var ModifyFormSubmitDone = false;
 	/* var param = $(location).attr('search').slice(
-			$(location).attr('search').indexOf('=') + 1); */ 
+			$(location).attr('search').indexOf('=') + 1); */
 	function ModifyFormSubmit(form) {
 		var fileInput1 = form["file__article__" + param.id
 				+ "__common__attachment__1"];
@@ -69,7 +71,6 @@
 		var fileInput3 = form["file__article__" + param.id
 				+ "__common__attachment__3"];
 
-		
 		var deleteFileInput1 = form["deleteFile__article__" + param.id
 				+ "__common__attachment__1"];
 		var deleteFileInput2 = form["deleteFile__article__" + param.id
@@ -77,7 +78,6 @@
 		var deleteFileInput3 = form["deleteFile__article__" + param.id
 				+ "__common__attachment__3"];
 
-		
 		if (fileInput1 && deleteFileInput1) {
 			if (deleteFileInput1.checked) {
 				fileInput1.value = '';
@@ -136,7 +136,7 @@
 		}
 		var startUploadFiles = function(onSuccess) {
 			var needToUpload = false;
-			
+
 			if (!needToUpload) {
 				needToUpload = fileInput1 && fileInput1.value.length > 0;
 			}
@@ -171,7 +171,6 @@
 			});
 		}
 
-		
 		ModifyFormSubmitDone = true;
 		startUploadFiles(function(data) {
 			var fileIdsStr = '';

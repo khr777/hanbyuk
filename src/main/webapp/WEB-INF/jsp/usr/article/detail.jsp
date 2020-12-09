@@ -4,14 +4,14 @@
 <c:set var="title" value="게시물 상세보기" />
 <%@ include file="../part/head.jspf"%>
 
-<h1 class="con">${board.name} 게시물 상세보기</h1>
+<h1 class="con">${board.name}게시물 상세보기</h1>
 
 
 
 <div class="con">
 	<div>제목 : ${article.title }</div>
 	<div>내용 : ${article.body }</div>
-		<c:if test="${article.extra.file__common__attachment['1'] != null}">
+	<c:if test="${article.extra.file__common__attachment['1'] != null}">
 		<!-- <div>첨부 파일 1</div> -->
 		<img
 			src="/admin/file/showImg?id=${article.extra.file__common__attachment['1'].id}&updateDate=${article.extra.file__common__attachment['1'].updateDate}"
@@ -35,8 +35,9 @@
 			</video>
 		</div>
 	</c:if>
-	
-
+	<div>
+		<button type="button" onclick="location.replace('${board.code}-list')">뒤로가기</button>
+	</div>
 </div>
 
 
